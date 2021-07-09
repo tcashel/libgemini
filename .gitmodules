@@ -1,0 +1,3 @@
+[submodule "lib/liblifthttp"]
+	path = lib/liblifthttp
+	url = git@github.com:jbaldwin/liblifthttp.git
