@@ -3,6 +3,26 @@
 [![language][badge.language]][language]
 [![license][badge.license]][license]
 
+Attempt to create a C++ library for Gemini Exchange's API: [Gemini's Documentation](https://docs.gemini.com/rest-api/).
+
+## Building
+
+If this is your first check out you need to build [`liblifthttp`](https://github.com/jbaldwin/liblifthttp) first, then make a build
+
+```bash
+make liblift
+make
+```
+
+See the [`makefile`](/makefile) for more of the make commands.
+
+## Dependencies
+
+This project uses [`liblifthttp`](https://github.com/jbaldwin/liblifthttp) to to handel HTTP requests.
+
+## Support
+
+File bugs and feature requests using [GitHub Issues](https://github.com/tcashel/libgemini/issues)
 
 Copyright © 2021, Tripp Cashel
 
