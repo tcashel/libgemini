@@ -20,6 +20,13 @@ See the [`makefile`](/makefile) for more of the make commands.
 
 This project uses [`liblifthttp`](https://github.com/jbaldwin/liblifthttp) to to handel HTTP requests.
 
+## Project plan
+
+- [ ] Set up some basic Unit testing and unit test along the way
+- [ ] Build out basic public api(no auth) functionality
+  - [ ] Easy way to switch between sandbox api url and production
+  - [ ] try to build in rate limit protection, across one session
+
 ## Support
 
 File bugs and feature requests using [GitHub Issues](https://github.com/tcashel/libgemini/issues)

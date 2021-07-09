@@ -1,4 +1,8 @@
 .DEFAULT_GOAL := debug
+DIR := ${CURDIR}
+DOCKER_TAG := 1.0
+DOCKER_REPO := docker/libgemini
+CONTAINER_NAME := libgemini
 
 .PHONY: debug
 debug:
@@ -36,6 +40,63 @@ clean:
 	rm -rf bin/LibGeminiProject
 
 .PHONY: clean-lib
-clean:
+clean-lib:
 	rm -rf lib/liblifthttp/Debug; \
 	rm -rf lib/liblifthttp/Release
+
+.PHONY: docker-up
+docker-up:
+	# start up the container
+	docker-compose up
+
+.PHONY: docker-down
+docker-down:
+	# stop container
+	docker-compose down -v --remove-orphans
+
+.PHONY: bash
+bash:
+	# bind mount a volume to container and bash on in.
+	docker run --name ${CONTAINER_NAME} --rm -it -d --mount type=bind,source="${DIR}",target=/tmp ${DOCKER_REPO}:${DOCKER_TAG} /bin/bash;
+	docker exec -it -e COLUMNS=`tput cols` -e LINES=`tput lines` ${CONTAINER_NAME} bash
+
+define help-text
+	Some Useful commands
+
+  make help
+    Prints help message and useful commands
+
+-- Building --
+
+  make
+    Compiles project and dependencies.
+
+  make release
+    builds with release build flags
+
+  make debug
+    builds with debug build flags
+
+  make liblift
+    builds liblifthttp, should be run once on project checkout
+
+  make clean
+    cleans up build artifacts and executibles for this project
+  make clean-lib
+    cleans up projects in lib/..
+
+-- Docker --
+
+  make docker-up
+    Spins up the docker container
+
+  make docker-down
+    Unwinds the docker container
+
+  make bash
+    Gets you into the docker container
+endef
+
+.PHONY: help
+help:
+	@: $(info $(help-text))

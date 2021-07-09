@@ -5,6 +5,13 @@ project(LibGeminiProject CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Use ccache if we have it, this will speed up builds
+find_program(CCACHE ccache)
+if(CCACHE)
+    message(STATUS "ccache is being used!")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE}")
+endif()
+
 set(LIBGEMINI_SOURCE_FILES
     src/main.cpp
 )
@@ -23,7 +30,13 @@ set(LIFT_CODE_COVERAGE  OFF CACHE INTERNAL "")
 # GNU compiler options
 target_compile_options(
     ${PROJECT_NAME} PRIVATE
-    -Wall -Wextra -Werror -Weffc++ -Wpedantic -pedantic-errors -Wno-unknown-pragmas
+    -Wall
+    -Wextra
+    -Werror
+    -Weffc++
+    -Wpedantic
+    -pedantic-errors
+    -Wno-unknown-pragmas
 )
 
 # setting destination of the build files

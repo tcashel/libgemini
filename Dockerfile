@@ -6,15 +6,16 @@ RUN sudo dnf install -y \
     cmake \
     git \
     ninja-build \
-    gcc-c++-9.3.1 \
-    clang-9.0.1 \
+    gcc-c++ \
+    clang \
     lcov \
     zlib-devel \
     libcurl-devel \
     libuv-devel \
     iputils \
     curl \
-    openssl-devel
+    openssl-devel \
+    ccache
 
 # If you have a preferred BASH setup, uncomment the following:
 # COPY	.profile /root/.profile
