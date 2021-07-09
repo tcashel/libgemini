@@ -31,11 +31,11 @@ liblift:
 
 .PHONY: clean
 clean:
-	-rm -rf Debug
-	-rm -rf Release
-	-rm -rf bin/LibGeminiProject
+	rm -rf Debug; \
+	rm -rf Release; \
+	rm -rf bin/LibGeminiProject
 
 .PHONY: clean-lib
 clean:
-	-rm -rf lib/liblifthttp/Debug
-	-rm -rf lib/liblifthttp/Release
+	rm -rf lib/liblifthttp/Debug; \
+	rm -rf lib/liblifthttp/Release
