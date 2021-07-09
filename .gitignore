@@ -3,6 +3,9 @@ bin/
 Debug/
 Release/
 
+# Editor ignores
+*.code-workspace
+
 # Prerequisites
 *.d
 
