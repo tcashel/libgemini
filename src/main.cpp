@@ -1,6 +1,8 @@
 #include <iostream>
 #include <lift/lift.hpp>
 
+#include "rapidjson/document.h"
+
 int main()
 {
     {

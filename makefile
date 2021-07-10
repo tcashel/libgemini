@@ -27,7 +27,7 @@ compile:
 
 .PHONY: liblift
 liblift:
-	cd lib/liblifthttp; \
+	cd vendor/liblifthttp; \
 	mkdir Release; \
 	cd Release; \
 	cmake -DCMAKE_BUILD_TYPE=Release ..; \
@@ -41,8 +41,8 @@ clean:
 
 .PHONY: clean-lib
 clean-lib:
-	rm -rf lib/liblifthttp/Debug; \
-	rm -rf lib/liblifthttp/Release
+	rm -rf vendor/liblifthttp/Debug; \
+	rm -rf vendor/liblifthttp/Release
 
 .PHONY: docker-up
 docker-up:
@@ -82,8 +82,8 @@ define help-text
 
   make clean
     cleans up build artifacts and executibles for this project
-  make clean-lib
-    cleans up projects in lib/..
+  make clean-vendor
+    cleans up projects in vendor/..
 
 -- Docker --
 

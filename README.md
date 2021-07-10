@@ -18,7 +18,9 @@ See the [`makefile`](/makefile) for more of the make commands.
 
 ## Dependencies
 
-This project uses [`liblifthttp`](https://github.com/jbaldwin/liblifthttp) to to handel HTTP requests.
+This project uses the following:
+- [`liblifthttp`](https://github.com/jbaldwin/liblifthttp) to to handel HTTP requests.
+- [`rapidjson`](https://github.com/Tencent/rapidjson) for json support.
 
 ## Project plan
 
