@@ -1,13 +1,13 @@
 version: '3.2'
 
 services:
-  main-build:
+  libgemini:
     build: .
     image: docker/libgemini:1.0
     volumes:
       - type: bind
         source: ./
-        target: /tmp
+        target: /libgemini
 networks:
   default:
     driver: bridge

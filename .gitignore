@@ -2,6 +2,7 @@
 bin/
 Debug/
 Release/
+build/
 
 # Editor ignores
 *.code-workspace

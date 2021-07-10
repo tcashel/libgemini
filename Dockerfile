@@ -5,6 +5,7 @@ FROM fedora:latest
 RUN sudo dnf install -y \
     cmake \
     git \
+    gdb \
     ninja-build \
     gcc-c++ \
     clang \
@@ -22,4 +23,4 @@ RUN sudo dnf install -y \
 # COPY	.bashrc /root/.bashrc
 
 # Set the working directory.
-WORKDIR	/tmp
+WORKDIR	/libgemini

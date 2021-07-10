@@ -57,7 +57,7 @@ docker-down:
 .PHONY: bash
 bash:
 	# bind mount a volume to container and bash on in.
-	docker run --name ${CONTAINER_NAME} --rm -it -d --mount type=bind,source="${DIR}",target=/tmp ${DOCKER_REPO}:${DOCKER_TAG} /bin/bash;
+	docker run --name ${CONTAINER_NAME} --rm -it -d --mount type=bind,source="${DIR}",target=/libgemini ${DOCKER_REPO}:${DOCKER_TAG} /bin/bash;
 	docker exec -it -e COLUMNS=`tput cols` -e LINES=`tput lines` ${CONTAINER_NAME} bash
 
 define help-text
