@@ -1,5 +1,5 @@
-[submodule "lib/liblifthttp"]
-	path = lib/liblifthttp
+[submodule "vendor/liblifthttp"]
+	path = vendor/liblifthttp
 	url = git@github.com:jbaldwin/liblifthttp.git
 [submodule "vendor/rapidjson"]
 	path = vendor/rapidjson
