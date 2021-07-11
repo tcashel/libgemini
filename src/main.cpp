@@ -11,7 +11,7 @@ int main()
     std::cout << response.data() << std::endl;
 
     simdjson::padded_string_view 
-    respomnse_padded(response.data(), response.data().size() + simdjson::SIMDJSON_PADDING);
+respomnse_padded(response.data(), response.data().size() + simdjson::SIMDJSON_PADDING);
     simdjson::dom::parser        parser;
     simdjson::dom::object        object;
 
