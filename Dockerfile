@@ -9,6 +9,7 @@ RUN sudo dnf install -y \
     ninja-build \
     gcc-c++ \
     clang \
+    clang-tools-extra \
     lcov \
     zlib-devel \
     libcurl-devel \
