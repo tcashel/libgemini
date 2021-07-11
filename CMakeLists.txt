@@ -12,28 +12,41 @@ if(CCACHE)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE}")
 endif()
 
-# Prepare RapidJSON (RapidJSON is a header-only library)
-set(RAPIDJSON_INCLUDE_DIR vendor/rapidjson/include)
+include(FetchContent)
+
+FetchContent_Declare(
+  simdjson
+  GIT_REPOSITORY https://github.com/simdjson/simdjson.git
+  GIT_TAG  v0.9.6
+  GIT_SHALLOW TRUE)
+
+FetchContent_MakeAvailable(simdjson)
 
 set(LIBGEMINI_SOURCE_FILES
     src/main.cpp
 )
 
-include_directories(${RAPIDJSON_INCLUDE_DIR})
-add_subdirectory(vendor/liblifthttp)
-
-add_executable(${PROJECT_NAME} ${LIBGEMINI_SOURCE_FILES})
-
-target_link_libraries(${PROJECT_NAME} PUBLIC lifthttp)
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
-
-set(LIFT_BUILD_EXAMPLES ON CACHE INTERNAL "")
-set(LIFT_BUILD_TESTS    ON CACHE INTERNAL "")
+set(LIFT_BUILD_EXAMPLES OFF CACHE INTERNAL "")
+set(LIFT_BUILD_TESTS    OFF CACHE INTERNAL "")
 set(LIFT_CODE_COVERAGE  OFF CACHE INTERNAL "")
 
-set(RAPIDJSON_BUILD_TESTS    OFF CACHE INTERNAL "")
-set(RAPIDJSON_BUILD_DOC      OFF CACHE INTERNAL "")
-set(RAPIDJSON_BUILD_EXAMPLES OFF CACHE INTERNAL "")
+add_subdirectory(vendor/liblifthttp)
+include_directories(vendor/simdjson/include)
+
+add_executable(${PROJECT_NAME} ${LIBGEMINI_SOURCE_FILES})
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+
+# setting destination of the build files
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES 
+    LINKER_LANGUAGE CXX
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC lifthttp)
+target_link_libraries(${PROJECT_NAME} PUBLIC simdjson)
 
 # GNU compiler options
 target_compile_options(
@@ -45,14 +58,8 @@ target_compile_options(
     -Wpedantic
     -pedantic-errors
     -Wno-unknown-pragmas
-)
-
-# setting destination of the build files
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin/lib"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    -g
+    -gdwarf-2
 )
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
@@ -60,8 +67,6 @@ if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     target_compile_options(
         ${PROJECT_NAME} PRIVATE
         -O0
-        -g
-        -gdwarf-2
     )
 
 else() # "Release"
@@ -69,7 +74,5 @@ else() # "Release"
     target_compile_options(
         ${PROJECT_NAME} PRIVATE
         -O3
-        -g
-        -gdwarf-2
     )
 endif()

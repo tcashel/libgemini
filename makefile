@@ -23,7 +23,7 @@ compile:
 	cmake \
 		-DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
 		..; \
-	make
+	cmake --build .
 
 .PHONY: liblift
 liblift:
@@ -33,16 +33,24 @@ liblift:
 	cmake -DCMAKE_BUILD_TYPE=Release ..; \
 	cmake --build .
 
+.PHONY: run
+run:
+	cd bin; \
+	./LibGeminiProject
+
 .PHONY: clean
 clean:
 	rm -rf Debug; \
 	rm -rf Release; \
 	rm -rf bin/LibGeminiProject
 
-.PHONY: clean-lib
-clean-lib:
+.PHONY: clean-all
+clean-all:
+	@$(MAKE) clean; \
 	rm -rf vendor/liblifthttp/Debug; \
-	rm -rf vendor/liblifthttp/Release
+	rm -rf vendor/liblifthttp/Release; \
+	rm -rf build
+
 
 .PHONY: docker-up
 docker-up:

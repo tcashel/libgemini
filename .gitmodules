@@ -1,6 +1,6 @@
 [submodule "vendor/liblifthttp"]
 	path = vendor/liblifthttp
 	url = git@github.com:jbaldwin/liblifthttp.git
-[submodule "vendor/rapidjson"]
-	path = vendor/rapidjson
-	url = https://github.com/Tencent/rapidjson.git
+[submodule "vendor/simdjson"]
+	path = vendor/simdjson
+	url = https://github.com/simdjson/simdjson

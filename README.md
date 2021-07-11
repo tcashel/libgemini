@@ -14,13 +14,13 @@ make liblift
 make
 ```
 
-See the [`makefile`](/makefile) for more of the make commands.
+See the [`makefile`](/makefile) for more of make commands.
 
 ## Dependencies
 
 This project uses the following:
 - [`liblifthttp`](https://github.com/jbaldwin/liblifthttp) to to handel HTTP requests.
-- [`rapidjson`](https://github.com/Tencent/rapidjson) for json support.
+- [`simdjson`](https://github.com/simdjson/simdjson) for json support.
 
 ## Project plan
 
