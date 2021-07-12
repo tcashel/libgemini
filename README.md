@@ -38,7 +38,7 @@ Make an Easy way to switch between sandbox api url and production
 
 ### User Classes
 
-Goal is for a A per session outgoing rate limiter
+Goal is for a per session outgoing rate limiter
 
 #### Request/Session class (name tbd)
 
