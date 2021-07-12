@@ -21,7 +21,7 @@ This project uses the following:
 - [`liblifthttp`][liblifthttp] to to handel HTTP requests.
 - [`simdjson`][simdjson] for json support.
 
-## Rough Project plan
+## Rough Project plan / Ideas
 
 - [ ] Set up some basic Unit testing and unit test along the way
 
@@ -45,13 +45,13 @@ Goal is for a A per session outgoing rate limiter
 - interface for creating / managing requests to API
   - inputing orders, one-off price queries etc..
   - should be somewhat lightweight
-- one instance per session
+- one instance per session, could be easier if this is just a wrapper for a request or task that gets passed to the engine.
 
 #### Engine Class (name tbd)
 
-- One per thread
 - what if there are 2 rates to enforce? PublicAPI vs PrivateAPI? 
   - Engine that implements ratelimit and loops over Request class instances, each which could have thier own rate limit.
+  - easier to just have one enginer per session so it's only dealing with 1 rate.
 - the rate limiter should always reserve a spot for 1 high priority order, ie: **cancel all orders**, **sell** etc.. This is most easily accomplised by reducing allowed rate set in Request class and allowing 1 type of order to ignore the rate limit.
 
 #### Order Status / Market data / Event Class (name tbd)
