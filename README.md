@@ -19,7 +19,9 @@ See the [`makefile`](/makefile) for more of make commands.
 
 This project uses the following:
 - [`liblifthttp`][liblifthttp] to to handel HTTP requests.
+  - As a git submodule
 - [`simdjson`][simdjson] for json support.
+  - As a git submodule 
 
 ## Rough Project plan / Ideas
 
@@ -57,6 +59,14 @@ Goal is for a per session outgoing rate limiter
 #### Order Status / Market data / Event Class (name tbd)
 - uses [Gemini's webhook](https://docs.gemini.com/websocket-api/#two-factor-authentication) API. 
 - Need to read more
+- websocket libraries
+  - [`cpprestsdk`][https://github.com/microsoft/cpprestsdk]
+    - [Web Socket support](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
+    - Project is in 'maintenance mode' so not the best thing to use, should search for  another option.
+    - `$ sudo dnf install cpprest-devel`
+  - [`µWebSockets`](https://github.com/uNetworking/uWebSockets)
+    - This looks nice!, 63 contributors, ok not great recent activity
+    - Apache 2.0 license
 
 ## Support
 
