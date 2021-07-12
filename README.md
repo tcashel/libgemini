@@ -5,6 +5,10 @@
 
 Attempt to create a C++ library for Gemini Exchange's API: [Gemini's Documentation](https://docs.gemini.com/rest-api/).
 
+## Checking out
+
+This project use git submodules, `git clone https://github.com/tcashel/libgemini.git` and then run `git submodule update --init --recursive`.
+
 ## Building
 
 If this is your first check out you need to make sure [`liblifthttp`][liblifthttp] and [`simdjson`][simdjson] git submodules are correctly checked out first, then make a build
@@ -22,6 +26,7 @@ This project uses the following:
   - As a git submodule
 - [`simdjson`][simdjson] for json support.
   - As a git submodule 
+  - CMake will compile this project base on a git tag int the [`CMakeLists.txt`](/CMakeLists.txt), so the submodule is not nesissary to build, but it is convienient to look through the project when using.
 
 ## Rough Project plan / Ideas
 
@@ -60,7 +65,7 @@ Goal is for a per session outgoing rate limiter
 - uses [Gemini's webhook](https://docs.gemini.com/websocket-api/#two-factor-authentication) API. 
 - Need to read more
 - websocket libraries
-  - [`cpprestsdk`][https://github.com/microsoft/cpprestsdk]
+  - [`cpprestsdk`](https://github.com/microsoft/cpprestsdk)
     - [Web Socket support](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
     - Project is in 'maintenance mode' so not the best thing to use, should search for  another option.
     - `$ sudo dnf install cpprest-devel`
@@ -68,13 +73,13 @@ Goal is for a per session outgoing rate limiter
     - This looks nice!, 63 contributors, ok not great recent activity
     - Apache 2.0 license
     - header only c++17, some use of c++20 in examples
-    - does not use cmake, uses make, nbd just add to make commands
+    - does not use cmake, uses make, nbd just add `include_directories(vendor/uWebSockets/src)` to cmake and we should be good since it is header only.
 
 ## Support
 
 File bugs and feature requests using [GitHub Issues](https://github.com/tcashel/libgemini/issues)
 
-Copyright © 2021, Tripp Cashel
+Copyright © 2021, Tripp Cashel, all rights reserved.
 
 [badge.language]: https://img.shields.io/badge/language-C%2B%2B17-yellow.svg
 [badge.license]: https://img.shields.io/badge/license-Apache--2.0-blue
