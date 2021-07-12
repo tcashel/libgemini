@@ -5,7 +5,8 @@ Release/
 build/
 
 # Editor ignores
-*.code-workspace
+#*.code-workspace
+# .vscode/
 
 # Prerequisites
 *.d

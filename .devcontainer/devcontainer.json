@@ -27,6 +27,11 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-vscode.cpptools-extension-pack",
+		"streetsidesoftware.code-spell-checker",
+		"shardulm94.trailing-spaces",
+		"eriklynd.json-tools",
+		"eamodio.gitlens",
+		"davidanson.vscode-markdownlint"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

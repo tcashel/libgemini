@@ -1,0 +1,11 @@
+{
+    "folders": [
+        {
+            "name": "libgemini",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "workbench.colorTheme": "One Dark Pro"
+    }
+}
