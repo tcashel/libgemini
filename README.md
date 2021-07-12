@@ -67,6 +67,8 @@ Goal is for a per session outgoing rate limiter
   - [`µWebSockets`](https://github.com/uNetworking/uWebSockets)
     - This looks nice!, 63 contributors, ok not great recent activity
     - Apache 2.0 license
+    - header only c++17, some use of c++20 in examples
+    - does not use cmake, uses make, nbd just add to make commands
 
 ## Support
 
