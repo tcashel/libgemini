@@ -23,6 +23,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(simdjson)
 
 set(LIBGEMINI_SOURCE_FILES
+    inc/consts.h
     src/main.cpp
 )
 
@@ -32,6 +33,7 @@ set(LIFT_CODE_COVERAGE  OFF CACHE INTERNAL "")
 
 add_subdirectory(vendor/liblifthttp)
 include_directories(vendor/simdjson/include)
+include_directories(inc)
 
 add_executable(${PROJECT_NAME} ${LIBGEMINI_SOURCE_FILES})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
@@ -48,19 +50,38 @@ set_target_properties(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} PUBLIC lifthttp)
 target_link_libraries(${PROJECT_NAME} PUBLIC simdjson)
 
-# GNU compiler options
-target_compile_options(
-    ${PROJECT_NAME} PRIVATE
-    -Wall
-    -Wextra
-    -Werror
-    -Weffc++
-    -Wpedantic
-    -pedantic-errors
-    -Wno-unknown-pragmas
-    -g
-    -gdwarf-2
-)
+if(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
+    target_compile_options(
+        ${PROJECT_NAME} PRIVATE
+        -Wall
+        -Wextra
+        -Weffc++
+        -Werror
+        -g
+        -gdwarf-2
+    )
+elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
+    target_compile_options(
+        ${PROJECT_NAME} PRIVATE
+        -Wall
+        -Wextra
+        -Weffc++
+        -Werror
+        -Weverything
+        -Wpedantic
+        -pedantic-errors
+        -Wno-c++98-compat
+        -Wno-c++98-compat-pedantic
+        -Wno-exit-time-destructors
+        -Wno-global-constructors
+        -Wno-padded
+        -Wno-switch-enum
+        -Wno-covered-switch-default
+        -Wno-disabled-macro-expansion
+        -g
+        -gdwarf-2
+    )
+endif()
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     message("${PROJECT_NAME} is building Debug")
