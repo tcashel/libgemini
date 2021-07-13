@@ -26,6 +26,7 @@ See the [`makefile`](/makefile) for more of make commands.
 ## Dependencies
 
 This project uses the following:
+
 - [`liblifthttp`][liblifthttp] to to handel HTTP requests.
   - As a git submodule
 - [`simdjson`][simdjson] for json support.
@@ -43,7 +44,7 @@ Make an Easy way to switch between sandbox api url and production
 
 #### PublicAPI Class
 
-  - [ ] Build out basic public api (no auth) functionality
+- [ ] Build out basic public api (no auth) functionality
 
 #### PrivateAPI Class
 
@@ -66,6 +67,7 @@ Goal is for a per session outgoing rate limiter
 - the rate limiter should always reserve a spot for 1 high priority order, ie: **cancel all orders**, **sell** etc.. This is most easily accomplished by reducing allowed rate set in Request class and allowing 1 type of order to ignore the rate limit.
 
 #### Order Status / Market data / Event Class (name tbd)
+
 - uses [Gemini's webhook](https://docs.gemini.com/websocket-api/#two-factor-authentication) API.
 - Need to read more
 - websocket libraries
