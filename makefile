@@ -3,6 +3,8 @@ DIR := ${CURDIR}
 DOCKER_TAG := 1.0
 DOCKER_REPO := docker/libgemini
 CONTAINER_NAME := libgemini
+CXX_PATH := /usr/bin/g++
+C_PATH := /usr/bin/gcc
 
 .PHONY: debug
 debug:
@@ -22,6 +24,8 @@ compile:
 	cd ${BUILD_TYPE}; \
 	cmake \
 		-DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
+		-DCMAKE_CXX_COMPILER=${CXX_PATH} \
+		-DCMAKE_C_COMPILER=${C_PATH} \
 		..; \
 	cmake --build .
 

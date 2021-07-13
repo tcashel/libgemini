@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
+#include <string_view>
 
 namespace consts::urls
 {
-inline const std::string ticker = "https://api.sandbox.gemini.com/v2/ticker/btcusd";
+inline constexpr const std::string_view ticker{"https://api.sandbox.gemini.com/v2/ticker/btcusd"};
 } // namespace consts::urls

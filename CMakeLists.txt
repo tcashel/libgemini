@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.16)
 # project for CMake
 project(LibGeminiProject CXX)
 
+message("CMAKE_C_COMPILER " ${CMAKE_C_COMPILER})
+message("CMAKE_CXX_COMPILER " ${CMAKE_CXX_COMPILER})
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Use ccache if we have it, this will speed up builds
@@ -12,18 +15,7 @@ if(CCACHE)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE}")
 endif()
 
-include(FetchContent)
-
-FetchContent_Declare(
-  simdjson
-  GIT_REPOSITORY https://github.com/simdjson/simdjson.git
-  GIT_TAG  v0.9.6
-  GIT_SHALLOW TRUE)
-
-FetchContent_MakeAvailable(simdjson)
-
 set(LIBGEMINI_SOURCE_FILES
-    inc/consts.h
     src/main.cpp
 )
 
@@ -32,15 +24,16 @@ set(LIFT_BUILD_TESTS    OFF CACHE INTERNAL "")
 set(LIFT_CODE_COVERAGE  OFF CACHE INTERNAL "")
 
 add_subdirectory(vendor/liblifthttp)
-include_directories(vendor/simdjson/include)
+add_subdirectory(vendor/simdjson)
+include_directories(SYSTEM PUBLIC vendor/simdjson/include)
 include_directories(inc)
 
 add_executable(${PROJECT_NAME} ${LIBGEMINI_SOURCE_FILES})
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
 # setting destination of the build files
 set_target_properties(${PROJECT_NAME}
-    PROPERTIES 
+    PROPERTIES
     LINKER_LANGUAGE CXX
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin/lib"
@@ -66,10 +59,10 @@ elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
         -Wall
         -Wextra
         -Weffc++
-        -Werror
+        #-Werror
         -Weverything
         -Wpedantic
-        -pedantic-errors
+        #-pedantic-errors
         -Wno-c++98-compat
         -Wno-c++98-compat-pedantic
         -Wno-exit-time-destructors
